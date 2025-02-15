@@ -541,12 +541,21 @@ TUMKO CHUTIYA BANAYA 😂
 @bot.message_handler(commands=['admincmd'])
 def welcome_plan(message):
     user_name = message.from_user.first_name
-    response = f'''🌟 𝑾𝑬𝑳𝑪𝑶𝑴𝑬, {user_name}! 𝒜𝒹𝓂𝒾𝓃 𝒞𝑜𝓂𝓂𝒶𝓃𝒹𝓈 𝒶𝓇𝑒 𝒽𝑒𝓇𝑒!! 🌟
+    response = f'''{user_name}, Admin Commands Are Here!!:
 
-💼 𝑇𝒽𝑒 𝒻𝑜𝓁𝓁𝑜𝓌𝒾𝓃𝑔 𝒶𝒹𝓂𝒾𝓃 𝒸𝑜𝓂𝓂𝒶𝓃𝒹𝓈 𝒶𝓇𝑒 𝒶𝓋𝒶𝒾𝓁𝒶𝒷𝓁𝑒 𝒻𝑜𝓇 𝓎𝑜𝓊 𝓉𝑜 𝓂𝒶𝓀𝑒 𝒸𝒽𝒶𝓃𝑔𝑒𝓈:
+💥 /add <userId> : Add a User.
+💥 /remove <userid> Remove a User.
+💥 /allusers : Authorised Users Lists.
+💥 /logs : All Users Logs.
+💥 /broadcast : Broadcast a Message.
+💥 /clearlogs : Clear The Logs File.
+💥 /clearusers : Clear The USERS File.
+'''
+    bot.reply_to(message, response)
 
-1️⃣ **/add <userId>** 
-   - 🔑 **Usage**: 𝒲𝒾𝓉𝒽 𝒶𝒹𝒹𝒾𝓃𝑔 𝒶 𝓊𝓈𝑒𝓇 𝒷𝓎 𝒾𝒹, 𝓎𝑜𝓊 𝒸𝒶𝓃 𝑒𝓂𝓅𝑜𝓌𝑒𝓇 𝓉𝒽𝑒𝓂 𝒻𝑜𝓇 𝒶𝒸𝒸𝑒𝓈𝓈 𝒶𝓃𝒹 𝒽𝒾𝑔𝒽 𝒻𝓊𝓃𝒸𝓉𝒾𝑜𝓃𝒶𝓁𝒾𝓉𝒾𝑒𝓈.
-
-2️⃣ **/remove <userId>**
-   - ❌ **Usage**: 𝑅𝑒𝓂𝑜𝓋𝑒 𝓉𝒽𝑒 𝓊𝓈𝑒𝓇 𝒷𝓎 𝒾𝒹, 𝒶𝓃𝒹 𝓈𝒾𝓂𝓅𝓁𝒾𝒻𝓎 𝒽𝒾𝓈 𝒶𝒸𝒸𝑒𝓈𝓈 
+@bot.message_handler(commands=['broadcast'])
+def broadcast_message(message):
+    user_id = str(message.chat.id)
+    if user_id in admin_id:
+        command = message.text.split(maxsplit=1)
+        if len(
