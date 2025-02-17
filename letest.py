@@ -144,7 +144,7 @@ def handle_attack(message):
         profile_pic = profile_photos.photos[0][-1].file_id
     else:
         # Ask the user to set a profile picture
-        bot.reply_to(message, "❌ **𝐓𝐎𝐃𝐀𝐘 𝐁𝐇𝐀𝐈, 𝐀𝐇 𝐎𝐇 𝐏𝐑𝐎𝐅𝐈𝐋𝐄 𝐏𝐈𝐂 𝐃𝐀𝐋𝐈𝐍𝐄!** 🔥\n📸 *𝐏𝐋𝐄𝐀𝐒𝐄 𝐒𝐄𝐓 𝐀 𝐏𝐑𝐎𝐅𝐈𝐋𝐄 𝐏𝐈𝐂𝐓𝐔𝐑𝐄 𝐓𝐎 𝐀𝐓𝐓𝐀𝐂𝐊!*")
+        bot.reply_to(message, "❌ ** 𝐀𝐁𝐄 𝐂𝐇𝐔𝐓𝐈𝐘𝐀, 𝐏𝐇𝐀𝐋𝐄 𝐏𝐑𝐎𝐅𝐈𝐋𝐄 𝐏𝐈𝐂𝐓𝐔𝐑𝐄 𝐋𝐀𝐆𝐀 😂!** 🔥\n📸 *𝐏𝐋𝐄𝐀𝐒𝐄 𝐒𝐄𝐓 𝐀 𝐏𝐑𝐎𝐅𝐈𝐋𝐄 𝐏𝐈𝐂𝐓𝐔𝐑𝐄 𝐓𝐎 𝐀𝐓𝐓𝐀𝐂𝐊!*")
         return
 
     remaining_attacks = ATTACK_LIMIT - user['attacks'] - 1
