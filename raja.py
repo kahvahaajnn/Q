@@ -76,15 +76,17 @@ def save_users():
 def is_user_in_channel(user_id):
     try:
         member = bot.get_chat_member(CHANNEL_USERNAME, user_id)
+        # Check if the user is a member, admin, or creator of the channel
         return member.status in ['member', 'administrator', 'creator']
     except:
-        return False
+        return False  # Return False if there is an error (e.g., user not found)
 
 pending_feedback = {}  # यूजर की स्क्रीनशॉट वेटिंग स्टेट स्टोर करने के लि
 
 def is_user_in_channel(user_id):
     return True  
 
+# Middleware to ensure users are joined to the channel
 @bot.message_handler(commands=['attack'])
 def handle_attack(message):
     global global_last_attack_time, global_pending_attack
@@ -97,6 +99,7 @@ def handle_attack(message):
         bot.reply_to(message, f"🚫 **𝐘𝐄 𝐁𝐎𝐓 𝐒𝐈𝐑𝐅 𝐆𝐑𝐎𝐔𝐏 𝐌𝐄 𝐂𝐇𝐀𝐋𝐄𝐆𝐀!** ❌\n🔗 𝐉𝐨𝐢𝐧 𝐍𝐨𝐰: {https://t.me/aloneboyisnaj}")
         return
 
+    # Check if the user is a member of the channel
     if not is_user_in_channel(user_id):
         bot.reply_to(message, f"❗ **𝐏𝐀𝐇𝐋𝐄 𝐉𝐎𝐈𝐍 𝐊𝐑𝐎** {CHANNEL_USERNAME} 🔥")
         return
@@ -106,7 +109,7 @@ def handle_attack(message):
         return
 
     if global_pending_attack is not None:
-        bot.reply_to(message, "⚠️ **𝐀𝐛𝐡𝐢 𝐄𝐤 𝐀𝐭𝐭𝐚𝐜𝐤 𝐂𝐡𝐚𝐥 𝐑𝐡𝐚 𝐇𝐚𝐢!** ⚡")
+        bot.reply_to(message, "⚠️ **𝐀𝐛𝐡𝐢 𝐄𝐤 𝐀𝐭𝐭𝐚𝐜𝐤 𝐂𝐡𝐚𝐥 𝐑𝐇𝐚 𝐇𝐚𝐢!** ⚡")
         return
 
     if global_last_attack_time and (datetime.datetime.now() - global_last_attack_time).seconds < COOLDOWN_TIME:
@@ -145,9 +148,9 @@ def handle_attack(message):
     bot.send_photo(message.chat.id, random_image, 
                    caption=f"💥 **𝑨𝑻𝑻𝑨𝑪𝑲 𝑺𝑻𝑨𝑹𝑻𝑬𝑫!** 💥\n"
                            f"🎯 **𝑻𝑨𝑹𝑮𝑬𝑻:** `{target} : {port}`\n"
-                           f"⏳ **𝒟𝒰𝑅𝒜𝒯𝒾𝒪𝒩:** {time_duration}𝙨\n"
+                           f"⏳ **𝒟𝒺𝓇𝒶𝓉𝒾𝑜𝓃:** {time_duration}𝙨\n"
                            f"⚡ **𝒮𝓉𝒶𝓉𝓊𝓈:** 𝑅𝓊𝓃𝓃𝒾𝓃𝑔...\n"
-                           f"🔒 **𝒮𝑒𝒸𝓊𝓇𝒾𝓉𝓎 𝒮𝓉𝒶𝓉𝓊𝓈:** 𝑆𝑒𝑐𝓊𝓇𝑒\n"
+                           f"🔒 **𝒮𝑒𝒸𝓊𝓇𝒾𝓉𝓎 𝒮𝓉𝒶𝓉𝓊𝓈:** 𝑆𝑒𝒸𝓊𝓇𝑒\n"
                            f"🌐 **𝒩𝑒𝓉𝓌𝑜𝓇𝒦 𝒮𝓉𝒶𝓉𝓊𝓈:** 𝒞𝑜𝓃𝓃𝑒𝑐𝓉𝑒𝒹\n"
                            f"🔧 **𝒮𝓎𝓈𝓉𝑒𝓂 𝒮𝓉𝒶𝓉𝓊𝓈:** 𝒪𝓅𝑒𝓃 𝓅𝑜𝓇𝓉 𝒹𝑒𝓉𝑒𝒸𝓉𝑒𝒹\n"
                            f"🛠️ **𝒞𝑜𝓃𝒹𝒾𝓉𝒾𝑜𝓃:** 𝒜𝓁𝓁 𝓈𝓎𝓈𝓉𝑒𝓂𝓈 𝑜𝓃𝓁𝒾𝓃𝑒")
