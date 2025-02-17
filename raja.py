@@ -84,36 +84,23 @@ def is_user_in_channel(user_id):
 pending_feedback = {}  # यूजर की स्क्रीनशॉट वेटिंग स्टेट स्टोर करने के लि
 
 def is_user_in_channel(user_id):
-    try:
-        # Fetch the user's membership status in the channel
-        member = bot.get_chat_member(CHANNEL_USERNAME, user_id)
-        
-        # Check if the user is a member, admin, or creator
-        if member.status in ['member', 'administrator', 'creator']:
-            return True
-        else:
-            return False
-    except Exception as e:
-        print(f"Error checking user {user_id} in channel: {str(e)}")
-        return False  # Return False if there is an error, like not found
+    return True  
 
+# Middleware to ensure users are joined to the channel
 @bot.message_handler(commands=['attack'])
 def handle_attack(message):
     user_id = str(message.from_user.id)
-    
-    # Debugging: Log if the user is in the channel or not
-    print(f"Checking if user {user_id} is in the channel...")
+    user_name = message.from_user.first_name
+    command = message.text.split()
 
-    # Check if the user is in the channel
+    # Check if the user is in the channel before proceeding with the attack
     if not is_user_in_channel(user_id):
         bot.reply_to(message, f"❗ **𝐏𝐀𝐇𝐋𝐄 𝐉𝐎𝐈𝐍 𝐊𝐑𝐎** {CHANNEL_USERNAME} 🔥")
         return
 
-    # Proceed with the rest of the attack logic here...
-    # If the user is in the channel, continue with attack logic (e.g., cooldown, attack limit, etc.)
-    print(f"User {user_id} is in the channel. Proceeding with attack logic.")
-    
-    # Other attack logic here...
+    if message.chat.id != int(GROUP_ID):
+        bot.reply_to(message, f"🚫 **𝐘𝐄 𝐁𝐎𝐓 𝐒𝐈𝐑𝐅 𝐆𝐑𝐎𝐔𝐏 𝐌𝐄 𝐂𝐇𝐀𝐋𝐄𝐆𝐀!** ❌\n🔗 𝐉𝐨𝐢𝐧 𝐍𝐨𝐰: {https://t.me/aloneboyisnaj}")
+        return
 
     if pending_feedback.get(user_id, False):
         bot.reply_to(message, "😡 **𝐏𝐄𝐇𝐋𝐄 𝐆𝐀𝐌𝐄 𝐊𝐀 𝐒𝐂𝐑𝐄𝐄𝐍𝐒𝐇𝐎𝐓 𝐃𝐄!** 🔥")
