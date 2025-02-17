@@ -89,17 +89,19 @@ def is_user_in_channel(user_id):
 # Middleware to ensure users are joined to the channel
 @bot.message_handler(commands=['attack'])
 def handle_attack(message):
+    global global_last_attack_time, global_pending_attack
+
     user_id = str(message.from_user.id)
     user_name = message.from_user.first_name
     command = message.text.split()
 
-    # Check if the user is in the channel before proceeding with the attack
-    if not is_user_in_channel(user_id):
-        bot.reply_to(message, f"❗ **𝐏𝐀𝐇𝐋𝐄 𝐉𝐎𝐈𝐍 𝐊𝐑𝐎** {CHANNEL_USERNAME} 🔥")
-        return
-
     if message.chat.id != int(GROUP_ID):
         bot.reply_to(message, f"🚫 **𝐘𝐄 𝐁𝐎𝐓 𝐒𝐈𝐑𝐅 𝐆𝐑𝐎𝐔𝐏 𝐌𝐄 𝐂𝐇𝐀𝐋𝐄𝐆𝐀!** ❌\n🔗 𝐉𝐨𝐢𝐧 𝐍𝐨𝐰: {https://t.me/aloneboyisnaj}")
+        return
+
+    # Check if the user is a member of the channel
+    if not is_user_in_channel(user_id):
+        bot.reply_to(message, f"❗ **𝐏𝐀𝐇𝐋𝐄 𝐉𝐎𝐈𝐍 𝐊𝐑𝐎** {CHANNEL_USERNAME} 🔥")
         return
 
     if pending_feedback.get(user_id, False):
